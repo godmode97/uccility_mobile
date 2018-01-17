@@ -5,16 +5,16 @@ Text
 } from 'react-native'
 
 
-
-export default class FloorMapping extends Component{
+import StatusBarColor from '../StatusBarColor'
+export default class Register extends Component{
     static navigationOptions={
-        title:'1st Floor'
+        title:'Register'
     }
     render(){
         return(
             <View>
                 <StatusBarColor color={Default.primaryAndroidDarker}/>
-                <Text>This is the First Floor</Text>
+                <Text>This is the Registration</Text>
             </View>
         )
     }
