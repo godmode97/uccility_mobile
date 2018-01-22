@@ -12,7 +12,7 @@ import {
 
 // const course = ["BSCS","BSIT","BSIS","BSEMC"]
 
-import studList from '../../../data/studentList.json'
+import studList from '../../data/studentList.json';
 
 class StudentList extends Component{
     static navigationOptions={

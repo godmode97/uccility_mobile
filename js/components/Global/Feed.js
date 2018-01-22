@@ -15,6 +15,8 @@ import StatusBarColor from '../StatusBarColor';
 import Pic from '../../../img/marcos.jpg';
 export default class Feed extends Component{
     render(){
+        let navigate =this.props.navigation
+        console.log(navigate+" navigate") 
         return(
             <View style={styles.container}>
                 <View style={styles.FeedHeader}>
@@ -24,25 +26,28 @@ export default class Feed extends Component{
                     </View>
                     <Text>By {this.props.role}</Text>
                 </View>
-                <TouchableHighlight onPressOut={()=>console.log(this.props)} >
+                <TouchableHighlight 
+                onPress={
+                    ()=>alert('asd')
+                }>
                     <View style={styles.FeedImageContainer}>
                         <Image 
                             source={{uri:'http://192.168.1.5:8000/storage/news_announcements/'+this.props.img}} 
                             style={styles.img}
                             />
-                        {console.log('http://192.168.1.5:8000/storage/avatar/'+this.props.img)}
                         <View style={styles.FeedDescription}>
                             <Text style={styles.description}>{this.props.description}</Text>
                         </View>
-                        <View style={styles.btnView}>
+                        
+                    </View>
+                </TouchableHighlight>
+                <View style={styles.btnView}>
                             <Button 
                                 title="Read" 
                                 color={Default.secondaryColor}
                                 onPress={()=>alert('Clicked')}
                             />
                         </View>
-                    </View>
-                </TouchableHighlight>
             </View>
         )
     }

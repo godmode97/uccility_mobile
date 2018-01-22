@@ -1,0 +1,92 @@
+[
+    {
+        "id":0,
+        "criteria":"",
+        "start_time":"7:00 am",
+        "end_time":"10:00 am",
+        "time_in":1,
+        "time_out":8,
+        "day":"MON",
+        "room":"301"
+    },
+    {
+        "id":1,
+        "criteria":"",
+        "start_time":"9:30 am",
+        "end_time":"12:30 pm",
+        "time_in":6,
+        "time_out":12,
+        "day":"MON",
+        "room":"301"
+    },
+    {
+        "id":2,
+        "criteria":"",
+        "start_time":"11:30 am",
+        "end_time":"3:00 pm",
+        "time_in":10,
+        "time_out":18,
+        "day":"MON",
+        "room":"301"
+    },
+    {
+        "id":3,
+        "criteria":"",
+        "start_time":"11:30 am",
+        "end_time":"3:00 pm",
+        "time_in":10,
+        "time_out":18,
+        "day":"TUE",
+        "room":"301"
+    },
+    {
+        "id":4,
+        "criteria":"",
+        "start_time":"11:30 am",
+        "end_time":"3:00 pm",
+        "time_in":10,
+        "time_out":18,
+        "day":"WED",
+        "room":"301"
+    },
+    {
+        "id":5,
+        "criteria":"",
+        "start_time":"11:30 am",
+        "end_time":"3:00 pm",
+        "time_in":10,
+        "time_out":18,
+        "day":"THURS",
+        "room":"301"
+    },
+    {
+        "id":6,
+        "criteria":"",
+        "start_time":"11:30 am",
+        "end_time":"3:00 pm",
+        "time_in":10,
+        "time_out":18,
+        "day":"FRI",
+        "room":"301"
+    },
+    {
+        "id":7,
+        "criteria":"",
+        "start_time":"11:30 am",
+        "end_time":"3:00 pm",
+        "time_in":10,
+        "time_out":18,
+        "day":"SAT",
+        "room":"301"
+    },
+    {
+        "id":7,
+        "criteria":"",
+        "start_time":"3:30 am",
+        "end_time":"7:30 pm",
+        "time_in":10,
+        "time_out":18,
+        "day":"SAT",
+        "room":"301"
+    }
+]

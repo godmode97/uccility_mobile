@@ -42,6 +42,8 @@ export default class ProfessorLogIn extends Component{
                         underlineColorAndroid="white"
                         placeholderTextColor="white"
                         selectionColor="white"
+                        keyboardType="default"
+                        secureTextEntry={true}
                         style={styles.txtBox}
                     />
                     <View style={styles.login}>

@@ -11,7 +11,7 @@ import {
 
 const days = ["MON","TUE","WED","THURS","FRI","SAT","SUN"]
 
-import schedData from '../../../data/schedule.json'
+import schedData from '../../data/schedule.json'
 
 class Schedule extends Component{
     render(){

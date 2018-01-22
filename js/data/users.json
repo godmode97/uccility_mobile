@@ -1,0 +1,76 @@
+[
+    {
+        "global":[
+            {
+                "index":0,
+                "route_name":"News Feed",
+                "route":"NewsFeed"
+            },
+            {
+                "index":1,
+                "route_name":"2D Mapping",
+                "route":"Mapping"
+            },
+            {
+                "index":2,
+                "route_name":"Augmented UCC",
+                "route":"AugmentedReality"
+            },
+            {
+                "index":3,
+                "route_name":"Professor",
+                "route":"Professor"
+            },
+            {
+                "index":4,
+                "route_name":"Student",
+                "route":"Student"
+            },
+            {
+                "index":5,
+                "route_name":"Chat Bot",
+                "route":"ChatBot"
+            }
+        ],
+        "professor":[
+            {
+                "index":0,
+                "route_name":"News Feed",
+                "route":"NewsFeed"
+            },
+            {
+                "index":1,
+                "route_name":"Personal Info",
+                "route":"Info"
+            },
+            {
+                "index":2,
+                "route_name":"Performance",
+                "route":"Performance"
+            },
+            {
+                "index":3,
+                "route_name":"Subjects",
+                "route":"Subjects"
+            },
+            {
+                "index":4,
+                "route_name":"2D Mapping",
+                "route":"Mapping"
+            },
+            {
+                "index":5,
+                "route_name":"Augmented UCC",
+                "route":"AugmentedReality"
+            },
+            {
+                "index":6,
+                "route_name":"Chat Bot",
+                "route":"ChatBot"
+            }
+        ],
+        "student":[
+
+        ]
+    }
+]

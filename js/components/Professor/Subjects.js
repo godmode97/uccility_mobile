@@ -12,7 +12,7 @@ import {
 
 const course = ["BSCS","BSIT","BSIS","BSEMC"]
 
-import subj from '../../../data/subjects.json'
+import subj from '../../data/subjects.json'
 // import sbj from '../../../data/subj'
 class Subjects extends Component{
     static navigationOptions={

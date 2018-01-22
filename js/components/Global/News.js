@@ -15,8 +15,12 @@ export default class News extends Component{
         }
     }
     render(){
+        const {state} = this.props.navigation;
+        // console.log(state);
         return(
             <View>
+                
+                
                 <StatusBarColor color={Default.primaryAndroidDarker}/>
                 <Text>The Fuckin News</Text>
             </View>

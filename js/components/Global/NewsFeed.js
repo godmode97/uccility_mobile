@@ -7,7 +7,8 @@ StatusBar,
 StyleSheet,
 Dimensions,
 Image,
-ScrollView
+ScrollView,
+ActivityIndicator
 } from 'react-native'
 
 import cover from '../../../img/ucc.jpg';
@@ -23,7 +24,8 @@ export default class NewsFeed extends Component{
         super(props);
         this.state={
             data:[],
-            news:[]
+            news:[],
+            ip:'192.168.43.221'
         }
 
     }
@@ -36,6 +38,7 @@ export default class NewsFeed extends Component{
             // opacity:0.8
             margin:0,
             height:Dimensions.get('window').height*0.2,
+            justifyContent:'flex-start'
         },
         headerTintColor: 'white',
         headerTitleStyle: { 
@@ -56,7 +59,7 @@ export default class NewsFeed extends Component{
     }
 
     onLoadData(){
-        fetch('http://192.168.1.5:8000/api/professor/6')
+        fetch(`http://${this.state.ip}:8000/api/professor/6`)
         .then(data=>data.json())
         .then(result=>{
             // console.log(result);
@@ -67,7 +70,7 @@ export default class NewsFeed extends Component{
     }
 
     onLoadFeed(){
-        fetch('http://192.168.1.5:8000/api/news')
+        fetch(`http://${this.state.ip}:8000/api/news`)
         .then(data=>data.json())
         .then(result=>{
             // console.log(result);
@@ -90,19 +93,17 @@ export default class NewsFeed extends Component{
                 <Image source={cover} style={styles.cover} blurRadius={10}/>
                 {/* {console.log(this.state.data)} */}
                 <ScrollView style={styles.News}>
-                    {/* <Button 
-                        title="Go to News"
-                        onPress={
-                            ()=>this.props.navigation.navigate('News')
-                        }/> */}
 
                         {
-                            news.map(function(nws){
+                            news.length==0?(
+                            <View>
+                                <ActivityIndicator color={Default.secondaryColor}/>
+                            </View>):news.map(function(nws){
                                 return(
                                     <Feed 
                                         key={nws.id}
                                         header={nws.header}
-                                        date="Jan 17 2018"
+                                        date="Jan 18 2018"
                                         role={nws.role}
                                         img={nws.photo}
                                         description={nws.description}

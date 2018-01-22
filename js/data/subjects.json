@@ -1,0 +1,92 @@
+[
+    {
+        "id":0,
+        "subj_code":"CS 411",
+        "description":"Intro to Computer",
+        "professor":"Sir Gutie",
+        "time_in":1,
+        "time_out":8,
+        "course":"BSCS",
+        "year":"4th"
+    },
+    {
+        "id":1,
+        "subj_code":"IS 411",
+        "description":"Computer Programming",
+        "professor":"Sir Merdegia",
+        "time_in":6,
+        "time_out":12,
+        "course":"BSIS",
+        "year":"4th"
+    },
+    {
+        "id":2,
+        "subj_code":"EMC 211",
+        "description":"Advanced Programming",
+        "professor":"Sir Gutie",
+        "time_in":10,
+        "time_out":18,
+        "course":"BSEMC",
+        "year":"2nd"
+    },
+    {
+        "id":3,
+        "subj_code":"IT 312",
+        "description":"Advanced Prog 3",
+        "professor":"Ma'am Gena",
+        "time_in":10,
+        "time_out":18,
+        "course":"BSIT",
+        "year":"3rd"
+    },
+    {
+        "id":4,
+        "subj_code":"IT 411",
+        "description":"Web Development 1",
+        "professor":"Ma'am Barrios",
+        "time_in":10,
+        "time_out":18,
+        "course":"BSIT",
+        "year":"4th"
+    },
+    {
+        "id":5,
+        "subj_code":"IS 321",
+        "description":"Elective 1",
+        "professor":"Sir Merdegia",
+        "time_in":10,
+        "time_out":18,
+        "course":"BSIS",
+        "year":"3rd"
+    },
+    {
+        "id":6,
+        "subj_code":"EMC 311",
+        "description":"Sir Nievas",
+        "professor":"3:00 pm",
+        "time_in":10,
+        "time_out":18,
+        "course":"BSEMC",
+        "year":"1st"
+    },
+    {
+        "id":7,
+        "subj_code":"CS 312",
+        "description":"SAD",
+        "professor":"Ma'am Gena",
+        "time_in":10,
+        "time_out":18,
+        "course":"BSCS",
+        "year":"2nd"
+    },
+    {
+        "id":7,
+        "subj_code":"CS 322",
+        "description":"Soft Eng",
+        "professor":"Sir Velarde",
+        "time_in":10,
+        "time_out":18,
+        "course":"BSCS",
+        "year":"1st"
+    }
+]
