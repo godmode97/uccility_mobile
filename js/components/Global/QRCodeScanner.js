@@ -7,7 +7,9 @@ import {
   Vibration,
   Animated,
   Easing,
-  View
+  View,
+  Text,
+  StatusBar
 } from 'react-native';
 
 import Camera from 'react-native-camera'
@@ -46,9 +48,11 @@ export default class QRCodeScanner extends Component {
     super(props);
     this.state = {
       scanning: false,
-      fadeInOpacity: new Animated.Value(0)
+      fadeInOpacity : new Animated.Value(0)
+      
     }
-
+    this.fadeInOpacity = new Animated.Value(0);
+    this.qrScanned = new Animated.Value(0);
     this._handleBarCodeRead = this._handleBarCodeRead.bind(this);
   }
 
@@ -65,6 +69,8 @@ export default class QRCodeScanner extends Component {
         )
       ]).start();
     }
+    this.fadeInOpacity.setValue(0)
+    this.qrScanned.setValue(0)
   }
 
   _setScanning(value) {
@@ -78,6 +84,9 @@ export default class QRCodeScanner extends Component {
       this.props.onRead(e)
       if (this.props.reactivate) {
         setTimeout(() => (this._setScanning(false)), this.props.reactivateTimeout);
+      }
+      if(e.data=="MIS"){
+          this.ARRendered()
       }
     }
   }
@@ -119,7 +128,7 @@ export default class QRCodeScanner extends Component {
             opacity: this.state.fadeInOpacity,
             backgroundColor: 'transparent'
           }}>
-          <Camera style={[styles.camera, this.props.cameraStyle]} onBarCodeRead={this._handleBarCodeRead.bind(this)}>
+          <Camera style={[styles.camera, this.props.cameraStyle]} onBarCodeRead={this._handleBarCodeRead.bind(this)} >
             {this._renderCameraMarker()}
           </Camera>
         </Animated.View>
@@ -132,14 +141,84 @@ export default class QRCodeScanner extends Component {
     )
   }
 
+  ARRendered(){
+    this._fade()
+    this._translate()
+  }
+
+  _fade(){
+    Animated.timing(this.fadeInOpacity,{
+      toValue:1,
+      duration:1500,
+      easing:Easing.ease
+    }).start()
+  }
+
+  _translate(){
+    Animated.timing(this.qrScanned,
+    {
+      toValue:3,
+      duration:1700,
+      easing:Easing.bounce
+    }).start()
+  }
+
+  _revert(){
+    Animated.timing(this.qrScanned,
+      {
+        toValue:0,
+        duration:1700,
+        easing:Easing.bounce
+      }).start()
+      Animated.timing(this.qrScanned,
+        {
+          toValue:0,
+          duration:1700,
+          easing:Easing.bounce
+        }).start()
+  }
+  _renderAR(e){
+    
+    return(
+      <View style={[
+        {position:'absolute'},
+        {zIndex:2},
+        // {marginTop:Dimensions.get('window').height*0.4},
+        // {marginLeft:Dimensions.get('window').width*0.35},
+        {height:Dimensions.get('window').height},
+        {width:Dimensions.get('window').width},
+        {textAlign:'center'}
+      ]} onTouchStart={()=>{
+        this._setScanning(true)
+        this._revert()
+        }}>
+        <Animated.Text
+        style={{
+          opacity:this.fadeInOpacity,
+          fontSize:60,
+          fontWeight:'bold',
+          transform:([{scaleX:this.qrScanned},{scaleY:this.qrScanned}]),
+          marginLeft:Dimensions.get('window').width*0.5,
+          marginTop:Dimensions.get('window').height*0.4
+        }}
+        >
+          MIS
+        </Animated.Text>
+      </View>
+    )
+  }
 
   render() {
+    
     return (
       <View style={[styles.mainContainer, this.props.containerStyle]}>
+      <StatusBar translucent backgroundColor="rgba(0,0,0,0.5)" />
+      {this._renderAR()}
         <View style={[styles.infoView, this.props.topViewStyle]}>
           {this._renderTopContent()}
         </View>
         {this._renderCamera()}
+        
         <View style={[styles.infoView, this.props.bottomViewStyle]}>
           {this._renderBottomContent()}
         </View>
@@ -164,7 +243,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'transparent',
-    height: Dimensions.get('window').width,
+    height: Dimensions.get('window').height,
     width: Dimensions.get('window').width,
   },
 

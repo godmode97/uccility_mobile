@@ -10,6 +10,7 @@ import Feed from '../components/Global/Feed';
 import Mapping from '../components/Global/Mapping';
 import FloorMapping from './Global/FloorMapping';
 import Augmented from './Global/Augmented';
+import QRCodeScanner from './Global/QRCodeScanner';
 import ChatBot from './Global/ChatBot';
 import Bot from './Global/Bot';
 import Info from './Professor/Info';
@@ -23,6 +24,8 @@ import StudentLogIn from './Student/LogIn';
 import Register from './Student/Register';
 
 import SideNavigator from './SideNavigator';
+
+import AnimatedSample from './Global/AnimatedSample';
 
 const NewsFeeds = StackNavigator({
     Feed:{
@@ -167,7 +170,7 @@ const Information = StackNavigator({
 const SideNavigation = DrawerNavigator({
     NewsFeed:{screen:NewsFeeds},
     Mapping:{screen:Maps},
-    AugmentedReality:{screen:Augmented},
+    AugmentedReality:{screen:QRCodeScanner},
     Professor:{screen:ProfessorLogIn},
     Student:{screen:StudentLogIn},
     Reg:{screen:Registration},
