@@ -18,7 +18,7 @@ import EditInfo from './Professor/EditInfo';
 import ProfessorLogIn from './Professor/LogIn';
 import Subjects from './Professor/Subjects';
 import StudentList from './Professor/StudentList';
-
+import SvgExample from './Global/SvgExample';
 
 import StudentLogIn from './Student/LogIn';
 import Register from './Student/Register';
@@ -178,10 +178,11 @@ const SideNavigation = DrawerNavigator({
     News:{screen:News},
     Feed:{screen:Feed},
     Subjects:{screen:Subjs},
-    Info:{screen:Information}
+    Info:{screen:Information},
+    SampleSvg:{screen:SvgExample}
 },
 {
-    initialRouteName:'NewsFeed',
+    initialRouteName:'SampleSvg',
     drawerWidth:Dimensions.get('window').width/1.2,
     contentOptions: {
           activeTintColor: 'white',

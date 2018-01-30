@@ -12,14 +12,14 @@ import {
 
 import Default from '../Default';
 
-export default class Bot extends Component<{}>{
+export default class Bot extends Component{
     static navigationOptions={
         title:'UCCility ChatBot'
     }
     render(){
         return(
             <View style={styles.container}>
-                <Text style={styles.connectionStatus}>Connecting...</Text><ActivityIndicator/>;
+                <Text style={styles.connectionStatus}>Connecting...</Text><ActivityIndicator/>
                 <ScrollView style={styles.messageBody}>
                     <Text>Message Body</Text>
                 </ScrollView>

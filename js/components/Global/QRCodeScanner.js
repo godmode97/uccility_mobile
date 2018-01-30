@@ -81,7 +81,7 @@ export default class QRCodeScanner extends Component {
     if (!this.state.scanning) {
       Vibration.vibrate();
       this._setScanning(true);
-      this.props.onRead(e)
+      this.props.onRead(e);
       if (this.props.reactivate) {
         setTimeout(() => (this._setScanning(false)), this.props.reactivateTimeout);
       }

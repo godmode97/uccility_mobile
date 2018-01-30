@@ -11,18 +11,19 @@ import Default from '../Default';
 import StatusBarColor from '../StatusBarColor';
 
 import Map from '../../../img/Mapping.jpg';
+
+import PinchZoomView from 'react-native-pinch-zoom-view';
+
 export default class Mapping extends Component{
     static navigationOptions={
         title:'UCC 2D Mapping',
     }
     render(){
         return(
-            <ScrollView>
-                <ScrollView horizontal={true}>
+            <PinchZoomView>
                     <StatusBarColor color={Default.primaryAndroidDarker}/>
                     <Image source={Map}/>
-                </ScrollView>
-            </ScrollView>
+            </PinchZoomView>
         )
     }
 }
