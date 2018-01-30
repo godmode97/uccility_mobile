@@ -18,35 +18,26 @@ import Svg,{
     Stop
 } from 'react-native-svg';
 
-import PinchZoomView from 'react-native-pinch-zoom-view';
+// import PinchZoomView from 'react-native-pinch-zoom-view';
+import LottieAnimation from 'lottie-react-native';
+
+
 
 export default class SvgExample extends Component {
+    componentDidMount() {
+        this.animation.play();
+        
+        }
     render() {
         return (
-            <PinchZoomView>
-                <Svg
-                    height="100"
-                    width="100"
-                >
-                    <Circle
-                        cx="50"
-                        cy="50"
-                        r="45"
-                        stroke="blue"
-                        strokeWidth="2.5"
-                        fill="green"
-                    />
-                    <Rect
-                        x="15"
-                        y="15"
-                        width="70"
-                        height="70"
-                        stroke="red"
-                        strokeWidth="2"
-                        fill="yellow"
-                    />
-                </Svg>
-            </PinchZoomView>
+                <LottieAnimation
+                    style={{flex:1}}
+                    ref={animation => {
+                    this.animation = animation;
+                    }}
+                    source={require('../../../bodymovin/data.json')}
+                    loop={true}
+                />
         );
     }
 }
