@@ -32,6 +32,9 @@ const NewsFeeds = StackNavigator({
         screen:NewsFeed,
         
     },
+    Feeds:{
+        screen:Feed
+    },
     News:{
         screen:News,
         navigationOptions:{
@@ -182,8 +185,9 @@ const SideNavigation = DrawerNavigator({
     SampleSvg:{screen:SvgExample}
 },
 {
-    initialRouteName:'SampleSvg',
+    initialRouteName:'NewsFeed',
     drawerWidth:Dimensions.get('window').width/1.2,
+    // renderScene={  },
     contentOptions: {
           activeTintColor: 'white',
           activeBackgroundColor:'#3E50B4',

@@ -45,7 +45,7 @@ export default class Feed extends Component{
                             <Button 
                                 title="Read" 
                                 color={Default.secondaryColor}
-                                onPress={()=>alert('Clicked')}
+                                onPress={()=>this.props.navigation.navigate('News')}
                             />
                         </View>
             </View>

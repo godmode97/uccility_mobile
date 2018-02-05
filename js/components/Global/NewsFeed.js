@@ -8,7 +8,8 @@ StyleSheet,
 Dimensions,
 Image,
 ScrollView,
-ActivityIndicator
+ActivityIndicator,
+TouchableHighlight
 } from 'react-native'
 
 import cover from '../../../img/ucc.jpg';
@@ -19,15 +20,17 @@ import {StackNavigator} from 'react-navigation';
 
 import StatusBarColor from '../StatusBarColor'
 import Default from '../Default';
+
+
+
 export default class NewsFeed extends Component{
     constructor(props){
         super(props);
         this.state={
             data:[],
             news:[],
-            ip:'192.168.43.221'
+            ip:'192.168.1.8'
         }
-
     }
     static navigationOptions={
         title:'News Feed',
@@ -37,8 +40,7 @@ export default class NewsFeed extends Component{
             // width:Dimensions.get('screen').width*0.8
             // opacity:0.8
             margin:0,
-            height:Dimensions.get('window').height*0.2,
-            justifyContent:'flex-start'
+            marginBottom:Dimensions.get('window').height*0.1
         },
         headerTintColor: 'white',
         headerTitleStyle: { 
@@ -78,12 +80,25 @@ export default class NewsFeed extends Component{
         })
         .catch(error=>console.log(error))
     }
+
     componentDidMount(){
         this.onLoadData();
         this.onLoadFeed();
     }
+
+    //bind navigation
+    navigateDir(){
+        return this.props.navigation.navigate('Feed')
+        
+    }
+
+    
+
     render(){
         let {news} = this.state
+        let {navigate} = this.props.navigation
+        // this.props.navigation.
+        console.log(this.props.navigation)
         return(
             <View style={styles.NewsFeed}>
                 <StatusBar
@@ -100,17 +115,41 @@ export default class NewsFeed extends Component{
                                 <ActivityIndicator color={Default.secondaryColor}/>
                             </View>):news.map(function(nws){
                                 return(
-                                    <Feed 
-                                        key={nws.id}
-                                        header={nws.header}
-                                        date="Jan 18 2018"
-                                        role={nws.role}
-                                        img={nws.photo}
-                                        description={nws.description}
-                                        style={styles.Feed}
-                                    />
-                                )
-                            })
+                                    <View style={styles.container} key={nws.id}>
+                                        <View style={styles.FeedHeader} >
+                                            <View style={styles.FeedPoster}>
+                                                <Text style={styles.header}>{nws.header}</Text>
+                                                <Text style={styles.date}>{"Feb 6 2018"}</Text>
+                                            </View>
+                                            <Text>By {nws.role}</Text>
+                                        </View>
+                                        <TouchableHighlight 
+                                        onPress={
+                                            ()=>alert('asd')
+                                        }>
+                                            <View style={styles.FeedImageContainer}>
+                                                <Image 
+                                                    source={{uri:'http://192.168.1.8:8000/storage/news_announcements/'+ nws.photo}} 
+                                                    style={styles.img}
+                                                    />
+                                                <View style={styles.FeedDescription}>
+                                                    <Text style={styles.description}>{nws.description}</Text>
+                                                </View>
+                                            </View>
+                                        </TouchableHighlight>
+                                        <View style={styles.btnView}>
+                                            <Button 
+                                                title="Read" 
+                                                color={Default.secondaryColor}
+                                                onPress={()=>console.log(navigate('News',{
+                                                    id:nws.id,
+                                                    title:nws.header
+                                                }))}
+                                            />
+                                        </View>
+                                    </View>
+                                ) //end of return
+                            }) //end of map
                         }
                        
                     </ScrollView>
@@ -137,5 +176,35 @@ const styles=StyleSheet.create({
     },
     News:{
         // flex:5
+    },
+    container:{
+        margin:5,
+        padding:10,
+        borderRadius:5,
+        backgroundColor:'white'
+    },
+    FeedPoster:{
+        flexDirection:'row',
+    },
+    header:{
+        fontSize:20,
+        fontWeight:'bold',
+        margin:5
+    },
+    FeedDescription:{
+        backgroundColor:'rgba(0,0,0,0.8)'
+    },
+    description:{
+        color:'white',
+        textAlign:'justify',
+        padding:10
+    },
+    img:{
+        width:Dimensions.get('window').width*0.95,
+        height:Dimensions.get('window').height*0.3,
+        // zIndex:-1
+    },
+    btnView:{
+        margin:5
     }
 })
