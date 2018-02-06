@@ -67,6 +67,11 @@
                 "index":6,
                 "route_name":"Chat Bot",
                 "route":"ChatBot"
+            },
+            {
+                "index":7,
+                "route_name":"Log Out",
+                "route":"LogOut"
             }
         ],
         "student":[

@@ -4,7 +4,8 @@ import {
     TouchableHighlight,
     Touchable,
     StyleSheet,
-    Dimensions
+    Dimensions,
+    AsyncStorage
 } from 'react-native';
 
 import {
@@ -30,12 +31,48 @@ import Default from './Default';
 
 export default class SideNavigator extends Component{
 
+    state = {
+        usertype : user[0].global
+    }
+    
+    _initializeState = async()=>{
+        try {
+            const users = await AsyncStorage.getItem('user_id');
+            if(users!==null){
+                console.log(users);
+                this.setState({usertype:user[0].professor});
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     render(){
+        this._initializeState();
+
+        // const userlist = AsyncStorage.getItem('user_id');
+        
+        // console.log(userlist)
+        // let users;
+        // if(userlist!==null){
+        //     if(user==='professor'){
+        //         users = user[0].professor
+        //     }
+        //     else if(user==='student'){
+        //         users = user[0].student
+        //     }
+        //     else users = user[0].global
+        // }
+        // else{
+        //     users = user[0].global
+        // }
+        let users = this.state.usertype;
+
         let {navigate} = this.props.navigation
-        console.log(navigate)
-        const users = user[0].professor
+        
         return(
             <Container>
+                
                 <Content>
                     <View style={styles.NavigationInfo}>
                         <View style={styles.NavigationDPHolder}>
@@ -49,7 +86,7 @@ export default class SideNavigator extends Component{
                         <Text style={styles.NavigationPos}>{users.length==6?"------------------------":"Professor"}</Text>
                     </View>
                     <List
-                        dataArray={users}
+                        dataArray={this.state.usertype}
                         renderRow={
                             data=>
                             <ListItem 

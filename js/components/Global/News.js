@@ -45,8 +45,8 @@ export default class News extends Component{
         console.log(params);
         return(
             <ScrollView>
-                
                 <StatusBarColor color={Default.primaryAndroidDarker}/>
+
                 <View>
 
                 </View>

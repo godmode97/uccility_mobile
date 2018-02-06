@@ -4,6 +4,7 @@ import {StatusBar,Dimensions} from 'react-native';
 
 import {StackNavigator , DrawerNavigator} from 'react-navigation';
 
+//Global Routes
 import NewsFeed from '../components/Global/NewsFeed';
 import News from '../components/Global/News';
 import Feed from '../components/Global/Feed';
@@ -19,6 +20,7 @@ import ProfessorLogIn from './Professor/LogIn';
 import Subjects from './Professor/Subjects';
 import StudentList from './Professor/StudentList';
 import SvgExample from './Global/SvgExample';
+import LogOut from './Global/LogOut';
 
 import StudentLogIn from './Student/LogIn';
 import Register from './Student/Register';
@@ -182,7 +184,8 @@ const SideNavigation = DrawerNavigator({
     Feed:{screen:Feed},
     Subjects:{screen:Subjs},
     Info:{screen:Information},
-    SampleSvg:{screen:SvgExample}
+    SampleSvg:{screen:SvgExample},
+    LogOut:{screen:LogOut}
 },
 {
     initialRouteName:'NewsFeed',

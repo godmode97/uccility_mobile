@@ -10,7 +10,8 @@ Button,
 Touchable,
 TouchableHighlight,
 Dimensions,
-StatusBar
+StatusBar,
+AsyncStorage
 } from 'react-native'
 
 import logo from '../../../img/uccility_glyph.png'
@@ -21,6 +22,51 @@ export default class ProfessorLogIn extends Component{
     static navigationOptions={
         title:'Log In As Professor'
     }
+
+    state = {
+        loggedin:false,
+        users:'public',
+        username:'',
+        password:''
+    }
+
+    _login(){
+        
+        fetch('http://192.168.1.8:3000/users',{
+            method:'post',
+            headers:{
+                'Accept':'application/json',
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({
+                username:this.state.username,
+                password:this.state.password
+            })
+            
+        })
+        .then((res)=>res.json())
+        .then(async(res)=>{
+            if(res.success){
+                alert(res.user);
+                await AsyncStorage.setItem('user_id',res.user+"");
+                
+                const value = await AsyncStorage.getItem('user_id');
+                if (value !== null){
+                    // We have data!!
+                    console.log(value);
+                }
+                 
+                
+            }
+            else{
+                alert(res.message);
+            }
+        })
+        .done()
+    }
+
+    
+
     render(){
         return(
             <KeyboardAvoidingView 
@@ -36,6 +82,7 @@ export default class ProfessorLogIn extends Component{
                         underlineColorAndroid="white"
                         placeholderTextColor="white"
                         selectionColor="white"
+                        onChangeText={(username)=>this.setState({username})}
                         style={styles.txtBox}
                     />
                     <TextInput placeholder="Password..."
@@ -44,12 +91,13 @@ export default class ProfessorLogIn extends Component{
                         selectionColor="white"
                         keyboardType="default"
                         secureTextEntry={true}
+                        onChangeText={(password)=>this.setState({password})}
                         style={styles.txtBox}
                     />
                     <View style={styles.login}>
                         <Button 
                         title="Log In" 
-                        onPress={()=>alert('Pressed')}
+                        onPress={()=>this._login()}
                         color={Default.secondaryColor}
                         accessibilityLabel="Log In Button"
                         style={styles.btn}
