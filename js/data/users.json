@@ -25,11 +25,6 @@
                 "index":4,
                 "route_name":"Student",
                 "route":"Student"
-            },
-            {
-                "index":5,
-                "route_name":"Chat Bot",
-                "route":"ChatBot"
             }
         ],
         "professor":[
@@ -57,11 +52,6 @@
                 "index":5,
                 "route_name":"Augmented UCC",
                 "route":"AugmentedReality"
-            },
-            {
-                "index":6,
-                "route_name":"Chat Bot",
-                "route":"ChatBot"
             },
             {
                 "index":7,

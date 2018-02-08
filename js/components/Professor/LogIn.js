@@ -33,28 +33,22 @@ export default class ProfessorLogIn extends Component{
 
     _login(){
         
-        fetch(`http://192.168.1.8:3000/users`,{
-            method:'post',
-            headers:{
-                'Accept':'application/json',
-                'Content-Type':'application/json'
-            },
-            body:JSON.stringify({
-                username:this.state.username,
-                password:this.state.password
-            })
-            
-        })
+        fetch(`http://${ip}:8000/api/user/${this.state.username}/${this.state.password}`)
         .then((res)=>res.json())
         .then(async(res)=>{
-            if(res.success){
-                alert(res.user);
-                await AsyncStorage.setItem('user_id',res.user+"");
+               
+            if(res!==null){
+                console.log(res);
+                // const [r] = res;
+                
+                await AsyncStorage.setItem('user_id',res.user_id+"");
+                await AsyncStorage.setItem('id',res.id+"");
                 
                 const value = await AsyncStorage.getItem('user_id');
                 if (value !== null){
                     console.log(value);
-                }
+                    alert("Logged In");
+                } 
                 setTimeout(() => {
                     this.props.navigation.navigate('NewsFeed');
                 }, 1500);

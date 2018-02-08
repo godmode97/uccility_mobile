@@ -38,6 +38,7 @@ export default class Info extends Component{
     }
     
     state = {
+        i:0,
         ip:"192.168.1.8",
         id: 0,
         data:[{
@@ -110,7 +111,7 @@ export default class Info extends Component{
         arr:[]
     }
     _getCredentials = async()=>{
-        await fetch(`http://${this.state.ip}:8000/api/professor/${this.state.id}`)
+        await fetch(`http://${ip}:8000/api/professor/${this.state.id}`)
         .then(data=>data.json())
         .then(result=>{
             // const [detail] = result;
@@ -122,9 +123,12 @@ export default class Info extends Component{
 
     _getID = async()=>{
         const id =  await AsyncStorage.getItem('user_id');
+        const i = await AsyncStorage.getItem('id');
+        
         if(id!==null){
             this.setState({
-                id
+                id,
+                i
             });
             
             this._getCredentials();
@@ -151,7 +155,7 @@ export default class Info extends Component{
                                 <View style={styles.container}>
                                 <StatusBar translucent backgroundColor={'rgba(0,0,0,0.5)'} />
                                     <Image 
-                                        source={{uri:`http://${this.state.ip}:8000/storage/avatar/cover.png`}}
+                                        source={{uri:`http://${ip}:8000/storage/avatar/cover.png`}}
                                         style={styles.cover}
                                         blurRadius={5}
                                     />

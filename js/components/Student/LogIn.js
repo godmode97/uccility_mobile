@@ -16,6 +16,7 @@ StatusBar
 import logo from '../../../img/uccility_glyph.png'
 
 import Default from '../Default'
+import ip from '../ip';
 
 export default class StudentLogIn extends Component{
     static navigationOptions = {
@@ -30,22 +31,12 @@ export default class StudentLogIn extends Component{
     }
 
 
-    _login(){
-        fetch(`http://192.168.1.8:3000/users`,{
-            method:'post',
-            headers:{
-                'Accept':'application/json',
-                'Content-Type':'application/json'
-            },
-            body:JSON.stringify({
-                username:this.state.username,
-                password:this.state.password
-            })
-            
-        })
+    _login = async() => {
+        fetch(`http://${ip}:8000/api/user/${this.state.username}/${this.state.password}`)
         .then((res)=>res.json())
         .then(async(res)=>{
-            if(res.success){
+            console.log(res)
+            if(res!==null){
                 alert(res.user);
                 await AsyncStorage.setItem('user_id',res.user+"");
                 
@@ -58,12 +49,16 @@ export default class StudentLogIn extends Component{
                 }, 1500);
             }
             else{
-                alert(res.message);
+                alert("asd");
             }
         })
         .done()
     }
+    componentDidMount(){
+        alert("asd")
+    }
     render(){
+
         return(
             <KeyboardAvoidingView 
                 keyboardVerticalOffset={100} 

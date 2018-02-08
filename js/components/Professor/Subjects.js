@@ -35,7 +35,7 @@ export default class Subjects extends Component{
 
     _fillData= async() => {
         
-        const id = await AsyncStorage.getItem('user_id');
+        const id = await AsyncStorage.getItem('id');
         if(id!==null){
             this.setState({id})
             fetch(`http://${ip}:8000/api/schedules/professor/${id}`)

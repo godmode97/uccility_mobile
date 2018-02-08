@@ -20,9 +20,9 @@ export default class Mapping extends Component{
     }
     render(){
         return(
-            <PinchZoomView>
+            <PinchZoomView style={[{height:500},{width:500}]}>
                     <StatusBarColor color={Default.primaryAndroidDarker}/>
-                    <Image source={Map}/>
+                    <Image source={Map} style={[{height:500},{width:500}]}/>
             </PinchZoomView>
         )
     }
