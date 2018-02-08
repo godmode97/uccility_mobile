@@ -22,8 +22,10 @@ import StudentList from './Professor/StudentList';
 import SvgExample from './Global/SvgExample';
 import LogOut from './Global/LogOut';
 
+//Student
 import StudentLogIn from './Student/LogIn';
 import Register from './Student/Register';
+import Profile from './Student/Profile';
 
 import SideNavigator from './SideNavigator';
 
@@ -98,7 +100,7 @@ const Registration = StackNavigator({
             headerTitleStyle: { color: 'white' }
         }
     }
-})
+});
 const CBot = StackNavigator({
     ChatBot:{
         screen:ChatBot,
@@ -121,7 +123,7 @@ const CBot = StackNavigator({
             headerTitleStyle: { color: 'white' }
         }
     }
-})
+});
 
 /**
  * Professor
@@ -145,18 +147,15 @@ const Subjs = StackNavigator({
             title:'Student List'
         }
     }
-})
+});
 
 const Information = StackNavigator({
     Info:{
         screen:Info,
         navigationOptions:{
-            headerStyle:{
-                backgroundColor:'#3E50B4'
-            },
             headerTintColor: 'white',
             headerTitleStyle: { color: 'white' },
-            title:'My Information'
+            title:''
         }
     },
     EditInfo:{
@@ -170,7 +169,29 @@ const Information = StackNavigator({
             title:'Edit My Information'
         }
     }
-})
+});
+
+const StudentProfile = StackNavigator({
+    Info:{
+        screen:Info,
+        navigationOptions:{
+            headerTintColor: 'white',
+            headerTitleStyle: { color: 'white' },
+            title:''
+        }
+    },
+    EditInfo:{
+        screen:EditInfo,
+        navigationOptions:{
+            headerStyle:{
+                backgroundColor:'#3E50B4'
+            },
+            headerTintColor: 'white',
+            headerTitleStyle: { color: 'white' },
+            title:'Edit My Information'
+        }
+    }
+});
 
 const SideNavigation = DrawerNavigator({
     NewsFeed:{screen:NewsFeeds},
@@ -185,7 +206,8 @@ const SideNavigation = DrawerNavigator({
     Subjects:{screen:Subjs},
     Info:{screen:Information},
     SampleSvg:{screen:SvgExample},
-    LogOut:{screen:LogOut}
+    LogOut:{screen:LogOut},
+    StudentProfile:{screen:Profile}
 },
 {
     initialRouteName:'NewsFeed',
@@ -199,4 +221,4 @@ const SideNavigation = DrawerNavigator({
     },
     contentComponent: props => <SideNavigator {...props} />
 })
-export default SideNavigation
+export default SideNavigation;

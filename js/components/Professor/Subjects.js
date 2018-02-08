@@ -7,14 +7,47 @@ import {
     Alert,
     TouchableOpacity,
     StatusBar,
-    Button
+    Button,
+    ActivityIndicator,
+    AsyncStorage
 } from 'react-native'
 
 const course = ["BSCS","BSIT","BSIS","BSEMC"]
+import ip from '../ip';
+// import subj from '../../data/subjects.json';
 
-import subj from '../../data/subjects.json'
-// import sbj from '../../../data/subj'
-class Subjects extends Component{
+
+
+export default class Subjects extends Component{
+
+    // constructor(){
+    //     super();
+    //     this.
+    // }
+
+    state = {
+        subj:[],
+        id:0
+    }
+    
+
+    
+
+    _fillData= async() => {
+        
+        const id = await AsyncStorage.getItem('user_id');
+        if(id!==null){
+            this.setState({id})
+            fetch(`http://${ip}:8000/api/schedules/professor/${id}`)
+            .then(data=>data.json())
+            .then(result=>{
+                console.log(result);
+                this.setState({subj:result})
+            })
+            .catch(error=>console.log(error))
+            }
+    }
+
     static navigationOptions={
         headerStyle:{
             backgroundColor:'#3E50B4',
@@ -28,40 +61,60 @@ class Subjects extends Component{
     }
     componentDidMount()
     {
+        this._fillData();
+    }
+
+    _replaceToDot(str){
+        const st = (str+"");
+        var finale = "";
+
+        if(st.length>20) finale = st.split(st[20])[0];
+        else st.split(st[st.length/2])[0]
         
+        return finale.replace(finale[finale.length-1],"...");
+
     }
     render(){
         let {navigate}=this.props.navigation
+
+        
+       
+        let {subj} = this.state
+        let {_replaceToDot} = this
         return(
             <View style={styles.container}>
             <StatusBar backgroundColor="#2F3E9E"/>
                 <ScrollView>
                     <View>
                             {
-                                course.map(function(crse){
+                                (subj.length>0)?course.map(function(crse){
                                 return(
                                     <View style={styles.schedDays}>
                                         <Text style={styles.schedDay}>{crse}</Text>
                                             {
-                                                subj.filter(s=>s.course==crse).map(function(s){
+                                                (subj.filter(s=>s.degree==crse).map(function(s){
                                                     return(
-                                                        <TouchableOpacity style={styles.schedSubj}  onPress={()=>Alert.alert(`${s.year} Year`,`Subject is ${s.description}`)}>
-                                                            <View style={styles.schedSubjCode}><Text style={styles.schedSCcolor}>{s.subj_code}</Text></View>
+                                                        <TouchableOpacity style={styles.schedSubj}  onPress={()=>Alert.alert(`${s.year} Year`,`Subject is ${s.subject_description}`)}>
+                                                            <View style={styles.schedSubjCode}>
+                                                            
+                                                            <Text style={styles.schedSCcolor}>{s.subject_code}</Text> 
+                                                            
+                                                            </View>
                                                             <View style={styles.desc}>
-                                                                <Text style={styles.subjDesc}>{s.description}</Text>
+                                                                <Text style={styles.subjDesc}>{_replaceToDot(s.subject_description)}</Text>
                                                                 <View>
-                                                                    <Text>{s.professor}</Text>
+                                                                    <Text>{s.start_time} - {s.end_time}</Text>
                                                                 </View>
                                                             </View>
                                                             <Button title="Student List" color="#E5742D" onPress={()=>navigate('StudList')}/>
                                                         </TouchableOpacity>
                                                     )
-                                                })
+                                                }))
                                             }
                                                 
                                     </View>
                                 )
-                            })}
+                            }):<ActivityIndicator/>}
                     </View>
                 </ScrollView>
                 <View style={styles.footer}>
@@ -136,5 +189,3 @@ const styles = StyleSheet.create({
         fontWeight:'bold'
     }
 })
-
-export default Subjects

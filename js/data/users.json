@@ -44,11 +44,6 @@
                 "route":"Info"
             },
             {
-                "index":2,
-                "route_name":"Performance",
-                "route":"Performance"
-            },
-            {
                 "index":3,
                 "route_name":"Subjects",
                 "route":"Subjects"

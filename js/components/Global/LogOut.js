@@ -8,12 +8,27 @@ import {
 } from 'react-native';
 
 export default class LogOut extends Component{
+    _logout= async() => {
+        await AsyncStorage.removeItem('user_id');
+        alert('Logged Out');
+        setTimeout(() => {
+            this.props.navigation.navigate('NewsFeed');
+        }, 1500);
+        
+        
+    }
+
+
+    componentDidMount(){
+
+    }
     render(){
+        this._logout();
         return(
             <View style={styles.container}>
                 <View style={styles.center}>
-                <ActivityIndicator size="large"/>
-                <Text>Logging Out</Text>
+                    <ActivityIndicator size="large"/>
+                    <Text>Logging Out</Text>
                 </View>
             </View>
         )

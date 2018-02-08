@@ -18,11 +18,50 @@ import logo from '../../../img/uccility_glyph.png'
 import Default from '../Default'
 
 export default class StudentLogIn extends Component{
-    static navigationOptions={
+    static navigationOptions = {
         title:'Log In As Student'
+    }
+    state = {
+        username:'',
+        password:''
     }
     _register(){
         this.props.navigation.navigate('Reg')
+    }
+
+
+    _login(){
+        fetch(`http://192.168.1.8:3000/users`,{
+            method:'post',
+            headers:{
+                'Accept':'application/json',
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({
+                username:this.state.username,
+                password:this.state.password
+            })
+            
+        })
+        .then((res)=>res.json())
+        .then(async(res)=>{
+            if(res.success){
+                alert(res.user);
+                await AsyncStorage.setItem('user_id',res.user+"");
+                
+                const value = await AsyncStorage.getItem('user_id');
+                if (value !== null){
+                    console.log(value);
+                }
+                setTimeout(() => {
+                    this.props.navigation.navigate('NewsFeed');
+                }, 1500);
+            }
+            else{
+                alert(res.message);
+            }
+        })
+        .done()
     }
     render(){
         return(
@@ -40,6 +79,7 @@ export default class StudentLogIn extends Component{
                         placeholderTextColor="white"
                         selectionColor="white"
                         style={styles.txtBox}
+                        onChangeText={(username)=>this.setState({username})}
                     />
                     <TextInput placeholder="Password..."
                         underlineColorAndroid="white"
@@ -47,6 +87,7 @@ export default class StudentLogIn extends Component{
                         selectionColor="white"
                         secureTextEntry={true}
                         style={styles.txtBox}
+                        onChangeText={(password)=>this.setState({password})}
                     />
                     <View style={styles.login}>
                         <Button 
@@ -58,7 +99,7 @@ export default class StudentLogIn extends Component{
                         />
                     </View>
 
-                    <View style={styles.login}>
+                    {/* <View style={styles.login}>
                         <Button 
                         title="Register" 
                         onPress={()=>this._register()}
@@ -66,7 +107,7 @@ export default class StudentLogIn extends Component{
                         accessibilityLabel="Log In Button"
                         style={styles.btn}
                         />
-                    </View>
+                    </View> */}
                 </View>
             </KeyboardAvoidingView>
         )

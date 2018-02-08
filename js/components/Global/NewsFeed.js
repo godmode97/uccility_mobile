@@ -20,7 +20,7 @@ import {StackNavigator} from 'react-navigation';
 
 import StatusBarColor from '../StatusBarColor'
 import Default from '../Default';
-
+import ip from '../ip';
 
 
 export default class NewsFeed extends Component{
@@ -29,7 +29,6 @@ export default class NewsFeed extends Component{
         this.state={
             data:[],
             news:[],
-            ip:'192.168.1.8'
         }
     }
     static navigationOptions={
@@ -37,8 +36,6 @@ export default class NewsFeed extends Component{
         headerStyle:{
             backgroundColor:'transparent',
             marginTop:StatusBar.currentHeight,
-            // width:Dimensions.get('screen').width*0.8
-            // opacity:0.8
             margin:0,
             marginBottom:Dimensions.get('window').height*0.1
         },
@@ -46,15 +43,7 @@ export default class NewsFeed extends Component{
         headerTitleStyle: { 
             color: 'white' 
         },
-        // cardStyle: { backgroundColor: 'transparent' },
-        //  header: { style: { backgroundColor: 'transparent' },
-        //   tintColor: 'white' }
     }
-    // constructor(){
-    //     this.state={
-    //         barHeight:StatusBar.currentHeight
-    //     }
-    // }
 
     onFeedPressed(){
         return this.props.navigation.navigate('Reg')
@@ -72,7 +61,7 @@ export default class NewsFeed extends Component{
     }
 
     onLoadFeed(){
-        fetch(`http://${this.state.ip}:8000/api/news`)
+        fetch(`http://${ip}:8000/api/news`)
         .then(data=>data.json())
         .then(result=>{
             // console.log(result);
@@ -97,16 +86,18 @@ export default class NewsFeed extends Component{
     render(){
         let {news} = this.state
         let {navigate} = this.props.navigation
-        // this.props.navigation.
+        
         console.log(this.props.navigation)
         return(
             <View style={styles.NewsFeed}>
+
                 <StatusBar
                     backgroundColor="rgba(0,0,0,0.5)"
                     translucent
                 />
+
                 <Image source={cover} style={styles.cover} blurRadius={10}/>
-                {/* {console.log(this.state.data)} */}
+                
                 <ScrollView style={styles.News}>
 
                         {
@@ -129,7 +120,7 @@ export default class NewsFeed extends Component{
                                         }>
                                             <View style={styles.FeedImageContainer}>
                                                 <Image 
-                                                    source={{uri:'http://192.168.1.8:8000/storage/news_announcements/'+ nws.photo}} 
+                                                    source={{uri:ip+':8000/storage/news_announcements/'+ nws.photo}} 
                                                     style={styles.img}
                                                     />
                                                 <View style={styles.FeedDescription}>

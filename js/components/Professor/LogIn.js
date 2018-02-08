@@ -12,11 +12,12 @@ TouchableHighlight,
 Dimensions,
 StatusBar,
 AsyncStorage
-} from 'react-native'
+} from 'react-native';
 
-import logo from '../../../img/uccility_glyph.png'
+import logo from '../../../img/uccility_glyph.png';
 
-import Default from '../Default'
+import Default from '../Default';
+import ip from '../ip';
 
 export default class ProfessorLogIn extends Component{
     static navigationOptions={
@@ -32,7 +33,7 @@ export default class ProfessorLogIn extends Component{
 
     _login(){
         
-        fetch('http://192.168.1.8:3000/users',{
+        fetch(`http://192.168.1.8:3000/users`,{
             method:'post',
             headers:{
                 'Accept':'application/json',
@@ -52,11 +53,11 @@ export default class ProfessorLogIn extends Component{
                 
                 const value = await AsyncStorage.getItem('user_id');
                 if (value !== null){
-                    // We have data!!
                     console.log(value);
                 }
-                 
-                
+                setTimeout(() => {
+                    this.props.navigation.navigate('NewsFeed');
+                }, 1500);
             }
             else{
                 alert(res.message);

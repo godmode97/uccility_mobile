@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
 import {
     View,
     Text,
@@ -6,16 +6,42 @@ import {
     StyleSheet,
     Alert,
     TouchableOpacity,
-    StatusBar
-} from 'react-native'
+    StatusBar,
+    ActivityIndicator,
+    AsyncStorage
+} from 'react-native';
 
-const days = ["MON","TUE","WED","THURS","FRI","SAT","SUN"]
+const days = ["MON","TUE","WED","THURS","FRI","SAT","SUN"];
 
-import schedData from '../../data/schedule.json'
+import schedData from '../../data/schedule.json';
 
 class Schedule extends Component{
+
+    state = {
+        schedData:[],
+        id
+    }
+
+    
+
+    _fillData= async() => {
+        const id = await AsyncStorage.getItem('user_id');
+        if(id!==null){
+            this.setState({id})
+            fetch(`http://${ip}:8000/api/news`)
+            .then(data=>data.json())
+            .then(result=>{
+                // console.log(result);
+                this.setState({news:result})
+            })
+            .catch(error=>console.log(error))
+            }
+    }
+
     render(){
-        const {navigate}=this.props.navigation
+        const {navigate}=this.props.navigation;
+
+        let d = e = 0;
         return(
             <View style={styles.container}>
             <StatusBar backgroundColor="#2F3E9E"/>
@@ -25,18 +51,19 @@ class Schedule extends Component{
                 <ScrollView>
                     <View>
                             {
-                                days.map(function(day){
+                                
+                                (this.state.schedData!==null)?days.map(function(day){
                                 console.log(day)
                                 return(
-                                    <View style={styles.schedDays}>
+                                    <View style={styles.schedDays} key={d+=1}>
                                         <Text style={styles.schedDay}>{day}</Text>
                                             {
                                                 schedData.filter(d=>d.day==day).map(function(d){
                                                     console.log(d)
                                                     return(
-                                                        <TouchableOpacity style={styles.schedSubj}  onPress={()=>navigate('Subjects')}>
-                                                            <View style={styles.schedSubjCode}><Text style={styles.schedSCcolor}>CS 111</Text></View>
-                                                            <Text>Description</Text>
+                                                        <TouchableOpacity style={styles.schedSubj}  onPress={()=>navigate('Subjects')} key={e+=1}>
+                                                            <View style={styles.schedSubjCode}><Text style={styles.schedSCcolor}>{d.subject_code}</Text></View>
+                                                            <Text>{d.subject_description}</Text>
                                                             <Text><Text style={styles.schedDay1}>{d.day}</Text> {d.start_time} - {d.end_time}</Text>
                                                         </TouchableOpacity>
                                                     )
@@ -45,7 +72,7 @@ class Schedule extends Component{
                                                 
                                     </View>
                                 )
-                            })}
+                            }):<ActivityIndicator/>}
                     </View>
                 </ScrollView>
             </View>

@@ -23,7 +23,7 @@ import Svg,{
     Stop
 } from 'react-native-svg';
 
-import { Pie } from 'react-native-pathjs-charts'
+import { Pie } from 'react-native-pathjs-charts';
 
 // import PinchZoomView from 'react-native-pinch-zoom-view';
 import LottieAnimation from 'lottie-react-native';

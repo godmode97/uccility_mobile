@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 
 
-export default class EditInfo extends Component{
+export default class Profile extends Component{
 
     state = {
         id: 0,
